@@ -15,8 +15,10 @@ LINE = (
 
 
 def main() -> None:
-    if not 1 <= len(LINE) <= 200 or "\n" in LINE:
-        raise SystemExit("entry must be one line of 1-200 characters")
+    if not 1 <= len(LINE) < 200 or "\n" in LINE or not LINE.strip():
+        raise SystemExit("entry must be one line under 200 characters")
+    if LINE != LINE.strip():
+        raise SystemExit("entry must not carry surrounding whitespace")
     out = Path("/output/entry.txt")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(LINE, encoding="utf-8")
